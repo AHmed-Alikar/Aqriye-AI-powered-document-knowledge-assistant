@@ -3,7 +3,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const db = require("./db");
-
+const documentsRouter = require("./routes/documents");
 const app = express();
 
 app.use(cors());
@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
     message: "Aqriye API is running",
   });
 });
-
+app.use("/api/documents", documentsRouter);
 app.get("/health", (req, res) => {
   res.json({
     status: "ok",

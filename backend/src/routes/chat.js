@@ -1,6 +1,10 @@
 const express = require("express");
 const rateLimit = require("express-rate-limit");
-const { answerQuestion } = require("../services/ragService");
+const { answerQuestionStream } = require("../services/ragService");
+const {
+  getOrCreateConversation,
+  saveMessage,
+} = require("../services/conversationService");
 
 const router = express.Router();
 
@@ -18,38 +22,65 @@ const chatLimiter = rateLimit({
   },
 });
 
+function sendEvent(res, event, data) {
+  res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
+}
+
 router.post("/", chatLimiter, async (req, res) => {
-  try {
-    const { message, documentId } = req.body;
+  const { message, documentId } = req.body;
 
-    if (!message || !message.trim()) {
-      return res.status(400).json({
-        status: "error",
-        message: "message is required",
-      });
-    }
-
-    if (!documentId) {
-      return res.status(400).json({
-        status: "error",
-        message: "Please select a document before asking a question.",
-      });
-    }
-
-    const { answer, sources } = await answerQuestion(message, documentId);
-
-    res.json({
-      status: "ok",
-      answer,
-      sources,
-    });
-  } catch (error) {
-    console.error("Chat request failed:", error);
-
-    res.status(500).json({
+  if (!message || !message.trim()) {
+    return res.status(400).json({
       status: "error",
-      message: "Failed to answer the question",
+      message: "message is required",
     });
+  }
+
+  if (!documentId) {
+    return res.status(400).json({
+      status: "error",
+      message: "Please select a document before asking a question.",
+    });
+  }
+
+  // Real token streaming via Server-Sent Events: the client gets
+  // "status" events tied to actual pipeline stages (search, then
+  // generation), "token" events as the LLM's real streamed output
+  // arrives, and a final "done" event with sources. Nothing here is a
+  // simulated/fake progress indicator.
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
+  res.flushHeaders();
+
+  const abortController = new AbortController();
+  req.on("close", () => abortController.abort());
+
+  try {
+    const conversationId = await getOrCreateConversation(documentId);
+    await saveMessage(conversationId, "user", message);
+
+    const { answer, sources } = await answerQuestionStream(message, documentId, {
+      onStatus: (status) => sendEvent(res, "status", { message: status }),
+      onToken: (token) => sendEvent(res, "token", { text: token }),
+      signal: abortController.signal,
+    });
+
+    const saved = await saveMessage(conversationId, "assistant", answer, sources);
+
+    sendEvent(res, "done", { sources, messageId: saved.id });
+    res.end();
+  } catch (error) {
+    if (error.name === "AbortError") {
+      // Client disconnected before the answer finished - nothing to send.
+      return res.end();
+    }
+
+    console.error("Chat request failed:", error);
+    sendEvent(res, "error", {
+      message: "Unable to generate an answer right now. Please try again.",
+    });
+    res.end();
   }
 });
 

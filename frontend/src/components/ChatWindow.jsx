@@ -1,25 +1,63 @@
-import { useEffect, useState } from "react";
-import { sendChatMessage } from "../services/api";
+import { useEffect, useRef, useState } from "react";
+import {
+  streamChatMessage,
+  getConversationHistory,
+  getSuggestedQuestions,
+} from "../services/api";
 import ChatMessage from "./ChatMessage";
 import LoadingIndicator from "./LoadingIndicator";
 
-const EXAMPLE_QUESTIONS = [
-  "What is the introduction about?",
-  "What is the problem statement?",
-  "What are the research questions?",
-  "What are the objectives of the project?",
-];
-
 export default function ChatWindow({ documentId, documentName }) {
   const [messages, setMessages] = useState([]);
+  const [historyStatus, setHistoryStatus] = useState("idle"); // idle | loading | success | error
+  const [suggestions, setSuggestions] = useState([]);
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [streaming, setStreaming] = useState(null); // { status, content } | null
+  const abortRef = useRef(null);
 
-  // Switching documents starts a fresh conversation - answers from a
-  // previous document shouldn't linger once the user moves on.
+  // Switching documents: cancel any in-flight answer for the previous
+  // document, then load this document's persisted history and its
+  // document-specific suggestions. History survives a page refresh
+  // because it's fetched fresh from the backend, not kept only in memory.
   useEffect(() => {
-    setMessages([]);
+    abortRef.current?.abort();
+    setStreaming(null);
+    setIsSending(false);
     setInput("");
+
+    if (!documentId) {
+      setMessages([]);
+      setSuggestions([]);
+      setHistoryStatus("idle");
+      return;
+    }
+
+    setHistoryStatus("loading");
+
+    getConversationHistory(documentId)
+      .then((history) => {
+        setMessages(
+          history.map((m) => ({
+            role: m.role,
+            content: m.content,
+            sources: m.sources,
+          }))
+        );
+        setHistoryStatus("success");
+      })
+      .catch((error) => {
+        console.error("Failed to load conversation history:", error);
+        setMessages([]);
+        setHistoryStatus("error");
+      });
+
+    getSuggestedQuestions(documentId)
+      .then(setSuggestions)
+      .catch((error) => {
+        console.error("Failed to load suggestions:", error);
+        setSuggestions([]);
+      });
   }, [documentId]);
 
   async function ask(question) {
@@ -28,27 +66,46 @@ export default function ChatWindow({ documentId, documentName }) {
     setMessages((prev) => [...prev, { role: "user", content: question }]);
     setInput("");
     setIsSending(true);
+    setStreaming({ status: "Searching document...", content: "" });
 
-    try {
-      const { answer, sources } = await sendChatMessage(question, documentId);
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: answer, sources },
-      ]);
-    } catch (error) {
-      console.error("Chat request failed:", error);
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content:
-            "Something went wrong while answering your question. Please try again.",
-          isError: true,
+    const controller = new AbortController();
+    abortRef.current = controller;
+    let accumulated = "";
+
+    await streamChatMessage(
+      question,
+      documentId,
+      {
+        onStatus: (status) => setStreaming({ status, content: accumulated }),
+        onToken: (text) => {
+          accumulated += text;
+          setStreaming({ status: null, content: accumulated });
         },
-      ]);
-    } finally {
-      setIsSending(false);
-    }
+        onDone: ({ sources }) => {
+          setMessages((prev) => [
+            ...prev,
+            { role: "assistant", content: accumulated, sources },
+          ]);
+          setStreaming(null);
+          setIsSending(false);
+        },
+        onError: (message) => {
+          setMessages((prev) => [
+            ...prev,
+            {
+              role: "assistant",
+              content:
+                message ||
+                "Unable to generate an answer right now. Please try again.",
+              isError: true,
+            },
+          ]);
+          setStreaming(null);
+          setIsSending(false);
+        },
+      },
+      controller.signal
+    );
   }
 
   function handleSubmit(event) {
@@ -57,12 +114,21 @@ export default function ChatWindow({ documentId, documentName }) {
   }
 
   const hasDocument = Boolean(documentId);
+  const showSuggestions =
+    hasDocument &&
+    messages.length === 0 &&
+    !streaming &&
+    historyStatus === "success" &&
+    suggestions.length > 0;
 
   return (
     <div className="flex h-full flex-col rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
       {hasDocument && (
         <div className="border-b border-slate-200 px-4 py-2 text-xs text-slate-500 dark:border-slate-800 dark:text-slate-400">
-          You are chatting with: <span className="font-medium text-slate-700 dark:text-slate-200">{documentName}</span>
+          You are chatting with:{" "}
+          <span className="font-medium text-slate-700 dark:text-slate-200">
+            {documentName}
+          </span>
         </div>
       )}
 
@@ -73,23 +139,34 @@ export default function ChatWindow({ documentId, documentName }) {
           </p>
         )}
 
-        {hasDocument && messages.length === 0 && (
-          <div className="space-y-3">
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              Ask a question about your document.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {EXAMPLE_QUESTIONS.map((question) => (
-                <button
-                  key={question}
-                  type="button"
-                  onClick={() => ask(question)}
-                  className="rounded-full border border-slate-200 px-3 py-1.5 text-xs text-slate-600 transition hover:border-slate-400 hover:text-slate-900 dark:border-slate-700 dark:text-slate-300 dark:hover:border-slate-500 dark:hover:text-white"
-                >
-                  {question}
-                </button>
-              ))}
-            </div>
+        {hasDocument && historyStatus === "loading" && (
+          <LoadingIndicator label="Loading conversation..." />
+        )}
+
+        {hasDocument && historyStatus === "error" && (
+          <p className="text-sm text-red-600 dark:text-red-400">
+            Unable to access the document right now. Please try again.
+          </p>
+        )}
+
+        {hasDocument && messages.length === 0 && !streaming && historyStatus === "success" && (
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            Ask a question about your document.
+          </p>
+        )}
+
+        {showSuggestions && (
+          <div className="flex flex-wrap gap-2">
+            {suggestions.map((question) => (
+              <button
+                key={question}
+                type="button"
+                onClick={() => ask(question)}
+                className="rounded-full border border-slate-200 px-3 py-1.5 text-xs text-slate-600 transition hover:border-slate-400 hover:text-slate-900 dark:border-slate-700 dark:text-slate-300 dark:hover:border-slate-500 dark:hover:text-white"
+              >
+                {question}
+              </button>
+            ))}
           </div>
         )}
 
@@ -97,10 +174,17 @@ export default function ChatWindow({ documentId, documentName }) {
           <ChatMessage key={i} {...msg} />
         ))}
 
-        {isSending && (
+        {streaming && (
           <div className="flex justify-start">
-            <div className="rounded-xl bg-slate-100 px-4 py-3 dark:bg-slate-800">
-              <LoadingIndicator label="Thinking..." />
+            <div className="max-w-[80%] rounded-xl bg-slate-100 px-4 py-3 text-sm dark:bg-slate-800">
+              {streaming.content ? (
+                <p className="whitespace-pre-wrap text-slate-800 dark:text-slate-100">
+                  {streaming.content}
+                  <span className="ml-0.5 animate-pulse">▍</span>
+                </p>
+              ) : (
+                <LoadingIndicator label={streaming.status || "Working..."} />
+              )}
             </div>
           </div>
         )}

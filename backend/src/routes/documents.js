@@ -149,4 +149,28 @@ router.post("/upload", uploadLimiter, upload.single("file"), async (req, res) =>
   }
 });
 
+router.get("/", async (req, res) => {
+  try {
+    const result = await db.query(
+      `SELECT id, file_name, created_at FROM documents ORDER BY created_at DESC`
+    );
+
+    res.json({
+      status: "ok",
+      documents: result.rows.map((row) => ({
+        id: row.id,
+        fileName: row.file_name,
+        createdAt: row.created_at,
+      })),
+    });
+  } catch (error) {
+    console.error("Failed to list documents:", error);
+
+    res.status(500).json({
+      status: "error",
+      message: "Failed to list documents",
+    });
+  }
+});
+
 module.exports = router;

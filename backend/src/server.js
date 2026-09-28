@@ -4,6 +4,8 @@ require("dotenv").config();
 
 const db = require("./db");
 const documentsRouter = require("./routes/documents");
+const { chunkText } = require("./services/chunkService");
+
 const app = express();
 
 app.use(cors());
@@ -21,7 +23,23 @@ app.get("/health", (req, res) => {
     message: "Aqriye API is running",
   });
 });
+app.get("/api/test-chunking", (req, res) => {
+  const text = `
+Aqriye is an AI-powered document knowledge assistant.
+It allows users to upload documents and ask questions.
+The system extracts text from documents and divides the text
+into smaller chunks before generating embeddings.
+These embeddings are stored in a vector database.
+  `;
 
+  const chunks = chunkText(text, 100, 20);
+
+  res.json({
+    status: "ok",
+    totalChunks: chunks.length,
+    chunks,
+  });
+});
 app.get("/api/test-db", async (req, res) => {
   try {
     const result = await db.query("SELECT NOW() AS current_time");

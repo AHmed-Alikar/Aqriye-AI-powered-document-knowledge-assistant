@@ -4,6 +4,7 @@ require("dotenv").config();
 
 const db = require("./db");
 const documentsRouter = require("./routes/documents");
+const chatRouter = require("./routes/chat");
 const { chunkText } = require("./services/chunkService");
 
 const app = express();
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
   });
 });
 app.use("/api/documents", documentsRouter);
+app.use("/api/chat", chatRouter);
 app.get("/health", (req, res) => {
   res.json({
     status: "ok",

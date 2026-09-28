@@ -1,4 +1,4 @@
-const LLM_MODEL = process.env.LLM_MODEL || "openai/gpt-oss-120b";
+const LLM_MODEL = process.env.LLM_MODEL || "meta-llama/Llama-3.1-8B-Instruct";
 const HF_CHAT_URL = "https://router.huggingface.co/v1/chat/completions";
 
 // The retrieved document text is untrusted data, not instructions. A

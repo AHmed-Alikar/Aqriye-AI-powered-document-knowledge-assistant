@@ -1,0 +1,82 @@
+[
+  {
+    "category": "direct",
+    "question": "What is the name of the fundraising platform described in this document?",
+    "expectedIdea": "Kaalmo"
+  },
+  {
+    "category": "direct",
+    "question": "What backend technology stack does the MVP use?",
+    "expectedIdea": "Node.js + Express, MongoDB + Mongoose"
+  },
+  {
+    "category": "direct",
+    "question": "Which mobile money providers are mentioned as payment options?",
+    "expectedIdea": "EVC Plus, eDahab, Zaad (and Sahal)"
+  },
+  {
+    "category": "direct",
+    "question": "What platform transaction fee percentage is recommended?",
+    "expectedIdea": "A low, transparent fee, e.g. 3-5%, example given is 4%"
+  },
+  {
+    "category": "direct",
+    "question": "List the campaign lifecycle statuses in order.",
+    "expectedIdea": "DRAFT -> SUBMITTED -> UNDER_REVIEW -> APPROVED -> PUBLISHED -> ACTIVE -> GOAL_REACHED -> WITHDRAWAL -> COMPLETED"
+  },
+  {
+    "category": "direct",
+    "question": "What are the main user roles on the platform?",
+    "expectedIdea": "Donor, Organizer, Beneficiary, Co-organizer, Admin, Moderator/Trust & Safety, Support Agent"
+  },
+  {
+    "category": "paraphrased",
+    "question": "Which programming framework powers the server side of this app?",
+    "expectedIdea": "Node.js + Express (paraphrase of backend stack question)"
+  },
+  {
+    "category": "paraphrased",
+    "question": "How does the platform make money?",
+    "expectedIdea": "Transaction fee % plus optional donor tip (paraphrase of business model)"
+  },
+  {
+    "category": "paraphrased",
+    "question": "Who has the authority to approve a payout request?",
+    "expectedIdea": "Admin (paraphrase of withdrawal review)"
+  },
+  {
+    "category": "paraphrased",
+    "question": "What happens to a campaign flagged as high risk for fraud?",
+    "expectedIdea": "Freeze - campaign/withdrawal paused pending manual review"
+  },
+  {
+    "category": "unanswerable",
+    "question": "Who is the CEO of this company?",
+    "expectedIdea": "Not available in the document"
+  },
+  {
+    "category": "unanswerable",
+    "question": "Does the platform support Bitcoin or other cryptocurrency payments?",
+    "expectedIdea": "Not available in the document"
+  },
+  {
+    "category": "unanswerable",
+    "question": "What is the company's physical office address?",
+    "expectedIdea": "Not available in the document"
+  },
+  {
+    "category": "unanswerable",
+    "question": "How many employees currently work on this project?",
+    "expectedIdea": "Not available in the document"
+  },
+  {
+    "category": "ambiguous",
+    "question": "Is this platform ready for production use?",
+    "expectedIdea": "Should ground in MVP/Beta-Ready definition-of-done criteria, not overclaim readiness"
+  },
+  {
+    "category": "ambiguous",
+    "question": "Is this platform safe?",
+    "expectedIdea": "Should ground in the Security Architecture section (HTTPS, hashing, rate limiting, etc.), not give an unqualified yes"
+  }
+]

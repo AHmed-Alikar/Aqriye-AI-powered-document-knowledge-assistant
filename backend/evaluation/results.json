@@ -1,0 +1,364 @@
+[
+  {
+    "category": "direct",
+    "question": "What is the name of the fundraising platform described in this document?",
+    "expectedIdea": "Kaalmo",
+    "answer": "The fundraising platform is called Kaalmo.",
+    "topSimilarity": 0.731824306467094,
+    "sources": [
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 44,
+        "similarity": 0.731824306467094
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 31,
+        "similarity": 0.725203774130457
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 0,
+        "similarity": 0.721080086263421
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 59,
+        "similarity": 0.719513659433752
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 4,
+        "similarity": 0.718457264808253
+      }
+    ]
+  },
+  {
+    "category": "direct",
+    "question": "What backend technology stack does the MVP use?",
+    "expectedIdea": "Node.js + Express, MongoDB + Mongoose",
+    "answer": "The information is not available in the provided documents.",
+    "topSimilarity": 0.720853896319192,
+    "sources": [
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 46,
+        "similarity": 0.720853896319192
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 50,
+        "similarity": 0.692884367280268
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 62,
+        "similarity": 0.659967739578216
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 60,
+        "similarity": 0.658975083705793
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 26,
+        "similarity": 0.653162318845072
+      }
+    ]
+  },
+  {
+    "category": "direct",
+    "question": "Which mobile money providers are mentioned as payment options?",
+    "expectedIdea": "EVC Plus, eDahab, Zaad (and Sahal)",
+    "answer": "The mobile money providers mentioned as payment options are:\n\n1. EVC Plus\n2. eDahab\n3. Zaad",
+    "topSimilarity": 0.705686926841741,
+    "sources": [
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 6,
+        "similarity": 0.705686926841741
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 26,
+        "similarity": 0.705003584027718
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 27,
+        "similarity": 0.678651512740688
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 1,
+        "similarity": 0.669114351710264
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 28,
+        "similarity": 0.659380117617854
+      }
+    ]
+  },
+  {
+    "category": "direct",
+    "question": "What platform transaction fee percentage is recommended?",
+    "expectedIdea": "A low, transparent fee, e.g. 3-5%, example given is 4%",
+    "answer": "Based on the retrieved excerpts, the recommended platform transaction fee percentage is 3-5% as mentioned in Chunk 43: \"Recommendation: A low, transparent transaction fee (e.g. 3–5%) shown clearly at checkout, plus an optional donor tip to offset platform costs — mirrors GoFundMe's model but keeps the core fee low to respect Somali sensitivity around \"who profits from a family's emergency.\"",
+    "topSimilarity": 0.736110633859992,
+    "sources": [
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 44,
+        "similarity": 0.736110633859992
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 43,
+        "similarity": 0.688274241891599
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 27,
+        "similarity": 0.684404572379726
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 51,
+        "similarity": 0.6720950012292
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 42,
+        "similarity": 0.657101631164551
+      }
+    ]
+  },
+  {
+    "category": "direct",
+    "question": "List the campaign lifecycle statuses in order.",
+    "expectedIdea": "DRAFT -> SUBMITTED -> UNDER_REVIEW -> APPROVED -> PUBLISHED -> ACTIVE -> GOAL_REACHED -> WITHDRAWAL -> COMPLETED",
+    "answer": "Based on the retrieved excerpts, the campaign lifecycle statuses in order are:\n\n1. DRAFT\n2. SUBMITTED\n3. UNDER_REVIEW\n4. APPROVED\n5. PUBLISHED\n6. ACTIVE\n7. GOAL_REACHED\n8. WITHDRAWAL\n9. COMPLETED\n\nThese statuses are listed in the excerpt from Chunk 17 of the document \"somalia-fundraising-platform-spec.pdf\".",
+    "topSimilarity": 0.703811841975948,
+    "sources": [
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 17,
+        "similarity": 0.703811841975948
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 16,
+        "similarity": 0.689863063113329
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 47,
+        "similarity": 0.688132341838061
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 31,
+        "similarity": 0.678958096628421
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 21,
+        "similarity": 0.659450929230346
+      }
+    ]
+  },
+  {
+    "category": "direct",
+    "question": "What are the main user roles on the platform?",
+    "expectedIdea": "Donor, Organizer, Beneficiary, Co-organizer, Admin, Moderator/Trust & Safety, Support Agent",
+    "answer": "Based on the retrieved excerpts, the main user roles on the platform are:\n\n1. **Donor**: Gives money, can browse, donate, comment, follow, bookmark, and view their own donation history/receipts.\n2. **Organizer**: Creates and runs a campaign, can create/edit/publish/pause/close campaign, invite co-organizers, post updates, and request withdrawal.\n3. **Beneficiary**: The person/entity funds are for, can accept invitation, submit verification documents, connect payout account, and view progress.\n4. **Co-organizer**: Assists the organizer, can post updates, view donations/analytics, and edit campaign content.\n5. **Admin**: Platform operator with full access to users, campaigns, payments, withdrawals, verification, settings (web dashboard only, no mobile app).\n6. **Moderator/Trust & Safety**: Reviews risk, reviews/approves/rejects/freeze campaigns, handles reports, and manages the fraud queue.\n\nThese roles have different permissions and restrictions, as outlined in the excerpts.",
+    "topSimilarity": 0.717232823371887,
+    "sources": [
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 9,
+        "similarity": 0.717232823371887
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 8,
+        "similarity": 0.716828090955502
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 21,
+        "similarity": 0.676746189594269
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 10,
+        "similarity": 0.658028244972229
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 60,
+        "similarity": 0.645423808421125
+      }
+    ]
+  },
+  {
+    "category": "paraphrased",
+    "question": "Which programming framework powers the server side of this app?",
+    "expectedIdea": "Node.js + Express (paraphrase of backend stack question)",
+    "answer": "The information is not available in the provided documents.",
+    "topSimilarity": 0.667749623522141,
+    "sources": [
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 11,
+        "similarity": 0.667749623522141
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 10,
+        "similarity": 0.661996960639954
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 38,
+        "similarity": 0.641019523143768
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 60,
+        "similarity": 0.630537487896532
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 50,
+        "similarity": 0.622508645057678
+      }
+    ]
+  },
+  {
+    "category": "paraphrased",
+    "question": "How does the platform make money?",
+    "expectedIdea": "Transaction fee % plus optional donor tip (paraphrase of business model)",
+    "answer": "The platform makes money through a 4% platform fee on each donation, as mentioned in the excerpt: \"Example calculation: $10,000 raised on a campaign, 4% platform fee = $400 platform revenue, $9,600 net to beneficiary (before payment processing costs, which should be itemized separately once real provider fees are confirmed).\"",
+    "topSimilarity": 0.684042116524052,
+    "sources": [
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 44,
+        "similarity": 0.684042116524052
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 61,
+        "similarity": 0.618514794663043
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 62,
+        "similarity": 0.614794492721562
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 56,
+        "similarity": 0.612125717870849
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 47,
+        "similarity": 0.606584297825778
+      }
+    ]
+  },
+  {
+    "category": "paraphrased",
+    "question": "Who has the authority to approve a payout request?",
+    "expectedIdea": "Admin (paraphrase of withdrawal review)",
+    "answer": null,
+    "error": "Language model returned an error",
+    "sources": []
+  },
+  {
+    "category": "paraphrased",
+    "question": "What happens to a campaign flagged as high risk for fraud?",
+    "expectedIdea": "Freeze - campaign/withdrawal paused pending manual review",
+    "answer": null,
+    "error": "Language model returned an error",
+    "sources": []
+  },
+  {
+    "category": "unanswerable",
+    "question": "Who is the CEO of this company?",
+    "expectedIdea": "Not available in the document",
+    "answer": null,
+    "error": "Language model returned an error",
+    "sources": []
+  },
+  {
+    "category": "unanswerable",
+    "question": "Does the platform support Bitcoin or other cryptocurrency payments?",
+    "expectedIdea": "Not available in the document",
+    "answer": null,
+    "error": "Language model returned an error",
+    "sources": []
+  },
+  {
+    "category": "unanswerable",
+    "question": "What is the company's physical office address?",
+    "expectedIdea": "Not available in the document",
+    "answer": null,
+    "error": "Language model returned an error",
+    "sources": []
+  },
+  {
+    "category": "unanswerable",
+    "question": "How many employees currently work on this project?",
+    "expectedIdea": "Not available in the document",
+    "answer": null,
+    "error": "Language model returned an error",
+    "sources": []
+  },
+  {
+    "category": "ambiguous",
+    "question": "Is this platform ready for production use?",
+    "expectedIdea": "Should ground in MVP/Beta-Ready definition-of-done criteria, not overclaim readiness",
+    "answer": null,
+    "error": "Language model returned an error",
+    "sources": []
+  },
+  {
+    "category": "ambiguous",
+    "question": "Is this platform safe?",
+    "expectedIdea": "Should ground in the Security Architecture section (HTTPS, hashing, rate limiting, etc.), not give an unqualified yes",
+    "answer": "Based on the retrieved excerpts, the platform appears to have several security measures in place to ensure safety. Here are a few examples:\n\n* The platform uses HTTPS everywhere (HSTS enforced) to ensure secure communication between the client and server.\n* It employs bcrypt/argon2 password hashing and short-lived signed JWTs with rotation to secure user authentication.\n* The platform has strict input validation on every endpoint (schema validation before any DB write) and uses Mongoose parameterized queries (no raw query injection) to prevent SQL injection attacks.\n* It also has output encoding + CSP headers against XSS and CSRF tokens on cookie-based web sessions to prevent cross-site scripting and cross-site request forgery attacks.\n* The platform has a locked-down CORS allowlist (web + mobile app origins only) and secure, httpOnly, sameSite cookies for refresh tokens to prevent cross-origin attacks.\n* Additionally, the platform has file upload validation (type/size allowlist, virus scan where feasible, stored outside web root, served via signed URLs) and webhook signature verification on every payment provider callback + replay protection via idempotency keys to prevent replay attacks.\n\nThese security measures suggest that the platform is designed to be secure and protect user data. However, it's worth noting that the excerpts do not provide a comprehensive assessment of the platform's overall safety.",
+    "topSimilarity": 0.642259078295122,
+    "sources": [
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 39,
+        "similarity": 0.642259078295122
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 44,
+        "similarity": 0.640840249161751
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 60,
+        "similarity": 0.639399406856246
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 38,
+        "similarity": 0.639172036623122
+      },
+      {
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "chunkIndex": 9,
+        "similarity": 0.633749861530956
+      }
+    ]
+  }
+]

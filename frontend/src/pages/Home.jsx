@@ -7,7 +7,7 @@ import ChatWindow from "../components/ChatWindow";
 export default function Home() {
   const [documents, setDocuments] = useState([]);
   const [status, setStatus] = useState("loading"); // loading | success | error
-  const [error, setError] = useState("");
+  const [selectedDocumentId, setSelectedDocumentId] = useState(null);
 
   const refreshDocuments = useCallback(async () => {
     setStatus("loading");
@@ -15,15 +15,28 @@ export default function Home() {
       const docs = await listDocuments();
       setDocuments(docs);
       setStatus("success");
+      return docs;
     } catch (err) {
-      setError(err.message);
+      console.error("Failed to load documents:", err);
       setStatus("error");
+      return [];
     }
   }, []);
 
   useEffect(() => {
     refreshDocuments();
   }, [refreshDocuments]);
+
+  async function handleUploaded() {
+    const docs = await refreshDocuments();
+    // Select the just-uploaded document so the user can start asking
+    // questions immediately instead of having to pick it again.
+    if (docs.length > 0) {
+      setSelectedDocumentId(docs[0].id);
+    }
+  }
+
+  const selectedDocument = documents.find((doc) => doc.id === selectedDocumentId);
 
   return (
     <div className="mx-auto flex min-h-screen max-w-5xl flex-col gap-6 p-6">
@@ -32,18 +45,26 @@ export default function Home() {
           Aqriye
         </h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">
-          Akhri. Raadi. Faham. — ask questions about your documents.
+          Akhri. Raadi. Faham.
         </p>
       </header>
 
-      <div className="grid flex-1 grid-cols-1 gap-6 md:grid-cols-[280px_1fr]">
+      <div className="grid flex-1 grid-cols-1 gap-6 md:grid-cols-[300px_1fr]">
         <div className="flex flex-col gap-4">
-          <FileUpload onUploaded={refreshDocuments} />
-          <DocumentList documents={documents} status={status} error={error} />
+          <FileUpload onUploaded={handleUploaded} />
+          <DocumentList
+            documents={documents}
+            status={status}
+            selectedDocumentId={selectedDocumentId}
+            onSelect={setSelectedDocumentId}
+          />
         </div>
 
         <div className="min-h-[500px]">
-          <ChatWindow hasDocuments={documents.length > 0} />
+          <ChatWindow
+            documentId={selectedDocument?.id ?? null}
+            documentName={selectedDocument?.fileName ?? null}
+          />
         </div>
       </div>
     </div>

@@ -5,6 +5,7 @@ const path = require("path");
 const db = require("../db");
 const { extractPdfText } = require("../services/documentService");
 const { chunkText } = require("../services/chunkService");
+const { generateEmbeddings } = require("../services/embeddingService");
 
 const router = express.Router();
 
@@ -71,20 +72,25 @@ router.post("/upload", upload.single("file"), async (req, res) => {
 
     const document = documentResult.rows[0];
 
-    // 6. Save chunks
+    // 6. Generate embeddings for every chunk
+    const embeddings = await generateEmbeddings(chunks);
+
+    // 7. Save chunks with their embeddings
     for (let i = 0; i < chunks.length; i++) {
       await client.query(
         `
         INSERT INTO document_chunks (
           document_id,
           content,
+          embedding,
           metadata
         )
-        VALUES ($1, $2, $3)
+        VALUES ($1, $2, $3, $4)
         `,
         [
           document.id,
           chunks[i],
+          JSON.stringify(embeddings[i]),
           JSON.stringify({
             chunk_index: i,
             total_chunks: chunks.length,
@@ -93,7 +99,7 @@ router.post("/upload", upload.single("file"), async (req, res) => {
       );
     }
 
-    // 7. Commit transaction
+    // 8. Commit transaction
     await client.query("COMMIT");
 
     res.status(201).json({

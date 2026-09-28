@@ -5,11 +5,15 @@ require("dotenv").config();
 const db = require("./db");
 const documentsRouter = require("./routes/documents");
 const chatRouter = require("./routes/chat");
-const { chunkText } = require("./services/chunkService");
 
 const app = express();
 
-app.use(cors());
+// Permissive by default for local development. Once FRONTEND_URL is set
+// (production), only that origin is allowed to call the API.
+const corsOptions = process.env.FRONTEND_URL
+  ? { origin: process.env.FRONTEND_URL }
+  : {};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -23,23 +27,6 @@ app.get("/health", (req, res) => {
   res.json({
     status: "ok",
     message: "Aqriye API is running",
-  });
-});
-app.get("/api/test-chunking", (req, res) => {
-  const text = `
-Aqriye is an AI-powered document knowledge assistant.
-It allows users to upload documents and ask questions.
-The system extracts text from documents and divides the text
-into smaller chunks before generating embeddings.
-These embeddings are stored in a vector database.
-  `;
-
-  const chunks = chunkText(text, 100, 20);
-
-  res.json({
-    status: "ok",
-    totalChunks: chunks.length,
-    chunks,
   });
 });
 app.get("/api/test-db", async (req, res) => {
@@ -59,6 +46,40 @@ app.get("/api/test-db", async (req, res) => {
       database: "connection failed",
     });
   }
+});
+
+// 404 for anything that didn't match a route above.
+app.use((req, res) => {
+  res.status(404).json({
+    status: "error",
+    message: "Not found",
+  });
+});
+
+// Central error handler. Catches multer errors (bad file type/size),
+// synchronous throws, and anything passed to next(err). Never leaks
+// stack traces or internal error messages to the client.
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err);
+
+  if (err.code === "LIMIT_FILE_SIZE") {
+    return res.status(413).json({
+      status: "error",
+      message: "File exceeds the 10MB limit",
+    });
+  }
+
+  if (err.message === "Only PDF files are allowed") {
+    return res.status(400).json({
+      status: "error",
+      message: err.message,
+    });
+  }
+
+  res.status(500).json({
+    status: "error",
+    message: "Internal server error",
+  });
 });
 
 const PORT = process.env.PORT || 5000;

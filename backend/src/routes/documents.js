@@ -1,6 +1,7 @@
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
+const rateLimit = require("express-rate-limit");
 
 const db = require("../db");
 const { extractPdfText } = require("../services/documentService");
@@ -9,13 +10,29 @@ const { generateEmbeddings } = require("../services/embeddingService");
 
 const router = express.Router();
 
+// Upload triggers PDF parsing + one embedding call per chunk, so it's
+// worth limiting per IP to avoid accidental abuse and runaway API cost.
+const uploadLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    status: "error",
+    message: "Too many uploads. Please try again later.",
+  },
+});
+
 const upload = multer({
   dest: path.join(__dirname, "../../uploads"),
   limits: {
     fileSize: 10 * 1024 * 1024,
   },
   fileFilter: (req, file, cb) => {
-    if (file.mimetype === "application/pdf") {
+    const hasValidExtension =
+      path.extname(file.originalname).toLowerCase() === ".pdf";
+
+    if (file.mimetype === "application/pdf" && hasValidExtension) {
       cb(null, true);
     } else {
       cb(new Error("Only PDF files are allowed"));
@@ -23,7 +40,7 @@ const upload = multer({
   },
 });
 
-router.post("/upload", upload.single("file"), async (req, res) => {
+router.post("/upload", uploadLimiter, upload.single("file"), async (req, res) => {
   let client;
 
   try {

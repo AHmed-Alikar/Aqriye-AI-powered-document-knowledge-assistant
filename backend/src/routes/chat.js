@@ -1,9 +1,24 @@
 const express = require("express");
+const rateLimit = require("express-rate-limit");
 const { answerQuestion } = require("../services/ragService");
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+// Each question triggers one embedding call + one LLM call, both billed
+// against Hugging Face's shared Inference Providers credit pool. Rate
+// limiting keeps a single client from burning through that budget.
+const chatLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    status: "error",
+    message: "Too many questions. Please slow down and try again shortly.",
+  },
+});
+
+router.post("/", chatLimiter, async (req, res) => {
   try {
     const { message } = req.body;
 

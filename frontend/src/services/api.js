@@ -81,7 +81,7 @@ export async function streamChatMessage(
     });
   } catch (error) {
     if (error.name === "AbortError") return;
-    onError?.("Aqriye is temporarily unable to connect to the server.");
+    onError?.("Aqriye AI is temporarily unable to connect to the server.");
     return;
   }
 

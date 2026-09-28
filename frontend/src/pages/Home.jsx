@@ -42,7 +42,7 @@ export default function Home() {
     <div className="mx-auto flex min-h-screen max-w-5xl flex-col gap-6 p-6">
       <header>
         <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-50">
-          Aqriye
+          Aqriye AI
         </h1>
         <p className="text-sm text-slate-500 dark:text-slate-400">
           Akhri. Raadi. Faham.

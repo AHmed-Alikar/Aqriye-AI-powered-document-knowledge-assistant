@@ -1,0 +1,74 @@
+[
+  {
+    "category": "A. direct factual",
+    "documentId": 4,
+    "question": "What is the introduction about?",
+    "expectedIdea": "International trade, seaports, Mogadishu Seaport challenges (Section 1.0)"
+  },
+  {
+    "category": "A. direct factual",
+    "documentId": 4,
+    "question": "What is the problem statement?",
+    "expectedIdea": "Lack of centralized digital system, manual processes, corruption at the seaport (Section 1.2)"
+  },
+  {
+    "category": "A. direct factual",
+    "documentId": 4,
+    "question": "What are the objectives of the project?",
+    "expectedIdea": "Create an online import/export management system, automate tracking (Section 1.5.2)"
+  },
+  {
+    "category": "B. section-specific",
+    "documentId": 4,
+    "question": "What is discussed in section 1.7?",
+    "expectedIdea": "Significance of the Project"
+  },
+  {
+    "category": "B. section-specific",
+    "documentId": 4,
+    "question": "What does section 1.2 cover?",
+    "expectedIdea": "Problem Statements"
+  },
+  {
+    "category": "C. summary",
+    "documentId": 4,
+    "question": "Summarize what this chapter covers overall.",
+    "expectedIdea": "Should reference multiple sections (intro, problem, objectives) without fabricating"
+  },
+  {
+    "category": "D. cross-chunk",
+    "documentId": 4,
+    "question": "What is the significance of the project and how does it relate to the problems identified?",
+    "expectedIdea": "Should connect Section 1.7 (significance) with Section 1.2 (problem statements)"
+  },
+  {
+    "category": "E. unanswerable",
+    "documentId": 4,
+    "question": "What is the capital of France?",
+    "expectedIdea": "Not available in the document"
+  },
+  {
+    "category": "E. unanswerable",
+    "documentId": 4,
+    "question": "What programming language is used to build this platform?",
+    "expectedIdea": "Not in this thesis chapter (that detail lives in the other document, not this one)"
+  },
+  {
+    "category": "F. wrong-document protection",
+    "documentId": 1,
+    "question": "What is the introduction about?",
+    "expectedIdea": "Should answer from the Somalia fundraising platform spec, never mention the seaport thesis"
+  },
+  {
+    "category": "F. wrong-document protection",
+    "documentId": 4,
+    "question": "What mobile money providers does this platform support?",
+    "expectedIdea": "That's Somalia-doc content - should NOT appear when scoped to the thesis; expect not-found"
+  },
+  {
+    "category": "G. document-scoping",
+    "documentId": 1,
+    "question": "What is the purpose of this platform?",
+    "expectedIdea": "Somalia-first fundraising platform - all sources must be documentId 1"
+  }
+]

@@ -1,0 +1,543 @@
+[
+  {
+    "category": "A. direct factual",
+    "documentId": 4,
+    "question": "What is the introduction about?",
+    "expectedIdea": "International trade, seaports, Mogadishu Seaport challenges (Section 1.0)",
+    "answer": "The introduction of this thesis is about the importance of seaports in facilitating international trade and economic growth. It highlights how seaports play a significant role in maintaining economic growth, strengthening ties with other countries, and collecting revenue in developing nations like Somalia. The introduction also mentions that international trade has emerged as a key force behind global economic growth, with the import and export industry serving as the basis for innovation, job creation, and the production of national income. It notes that more than 80% of global merchandise trade by volume passes through ports, making them vital physical gateways. The introduction also touches on the challenges faced by seaports, such as manual procedures, low adoption of technology, and disjointed data management systems, which present operational challenges despite their potential.",
+    "allScopedCorrectly": true,
+    "sources": [
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 2,
+        "section": "1.0 Introduction",
+        "similarity": 0.646982425271417
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 2,
+        "section": "1.0 Introduction",
+        "similarity": 0.584724118395097
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 2,
+        "section": "1.0 Introduction",
+        "similarity": 0.574058390380692
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 8,
+        "section": "1.8 Project Organization",
+        "similarity": 0.537269044274305
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 6,
+        "section": "1.5.2 Specific Objectives",
+        "similarity": 0.534581530205745
+      }
+    ]
+  },
+  {
+    "category": "A. direct factual",
+    "documentId": 4,
+    "question": "What is the problem statement?",
+    "expectedIdea": "Lack of centralized digital system, manual processes, corruption at the seaport (Section 1.2)",
+    "answer": "The problem statement is that the Mogadishu Seaport relies heavily on manual processes for documentation, cargo tracking, and customs clearance, leading to duplication of effort, delays, and information loss. This is due to stakeholders operating through disconnected systems, and authorities struggling to keep an eye on cargo flow and identify anomalies in the absence of a centralized database. As a result, there is limited accountability and cases of revenue leakage due to the lack of transparency.",
+    "allScopedCorrectly": true,
+    "sources": [
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 5,
+        "section": "1.2 Problem Statements",
+        "similarity": 0.661347859421501
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 5,
+        "section": "1.2 Problem Statements",
+        "similarity": 0.659233414026092
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 7,
+        "section": "1.7 Significance of the Project",
+        "similarity": 0.544429031346499
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 1,
+        "section": null,
+        "similarity": 0.534282680239358
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 9,
+        "section": "1.8 Project Organization",
+        "similarity": 0.528409060429447
+      }
+    ]
+  },
+  {
+    "category": "A. direct factual",
+    "documentId": 4,
+    "question": "What are the objectives of the project?",
+    "expectedIdea": "Create an online import/export management system, automate tracking (Section 1.5.2)",
+    "answer": "The objectives of the project are to create an online import and export management system that will improve Mogadishu Seaport's trade operations' efficiency, accountability, and transparency. The specific objectives are:\n\n1. To create an intuitive online interface for import and export process management.\n2. To automate cargo tracking, document verification, and customs clearance processes.\n3. To enable real-time communication between traders and port authorities.\n\nThese objectives aim to address the current problems faced by the Mogadishu Seaport, such as the lack of a centralized digital system, ineffective and time-consuming processes, and the risk of corruption. The project also aims to support Somalia's National ICT Strategy and the Sustainable Development Goals (SDGs) of the UN.",
+    "allScopedCorrectly": true,
+    "sources": [
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 6,
+        "section": "1.5.2 Specific Objectives",
+        "similarity": 0.9126132227547911
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 6,
+        "section": "1.5.2 Specific Objectives",
+        "similarity": 0.799236142635345
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 5,
+        "section": "1.2 Problem Statements",
+        "similarity": 0.694918572902679
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 7,
+        "section": "1.7 Significance of the Project",
+        "similarity": 0.692598856377743
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 8,
+        "section": "1.8 Project Organization",
+        "similarity": 0.686111927032471
+      }
+    ]
+  },
+  {
+    "category": "B. section-specific",
+    "documentId": 4,
+    "question": "What is discussed in section 1.7?",
+    "expectedIdea": "Significance of the Project",
+    "answer": "The section 1.7 discusses the significance of the project, stating that the creation of an import and export management platform for Mogadishu Seaport is crucial for Somalia's economic transformation. This is because the platform will decrease clearance times and logistical bottlenecks by automating manual processes, increasing operational efficiency. Additionally, it will encourage accountability and transparency by providing real-time access to validated data and transaction logs, which will aid in battling corruption. The platform will also improve analytics and data management, allowing policymakers to base their decisions on precise trade data, and provide convenience, predictability, and lower costs for traders and shipping agents.",
+    "allScopedCorrectly": true,
+    "sources": [
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 7,
+        "section": "1.7 Significance of the Project",
+        "similarity": 0.814897827518249
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 7,
+        "section": "1.7 Significance of the Project",
+        "similarity": 0.787593722343445
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 7,
+        "section": "1.7 Significance of the Project",
+        "similarity": 0.771217045638917
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 8,
+        "section": "1.8 Project Organization",
+        "similarity": 0.612295902508254
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 8,
+        "section": "1.8 Project Organization",
+        "similarity": 0.59053373336792
+      }
+    ]
+  },
+  {
+    "category": "B. section-specific",
+    "documentId": 4,
+    "question": "What does section 1.2 cover?",
+    "expectedIdea": "Problem Statements",
+    "answer": "Section 1.2 of the document covers the problem statements related to the Import and Export Platform for Mogadishu Seaport. It highlights the challenges faced by the port, including the lack of a centralized digital system, ineffective and time-consuming manual processes, and the risk of corruption. The section also mentions information loss, duplication, and delays in customs clearance, and how these issues hinder the port's ability to operate efficiently and transparently. Additionally, it explains how the project aims to address these problems by creating a digital platform that streamlines trade documentation, customs clearance, and cargo tracking, and supports Somalia's National ICT Strategy.",
+    "allScopedCorrectly": true,
+    "sources": [
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 5,
+        "section": "1.2 Problem Statements",
+        "similarity": 0.834110046380161
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 5,
+        "section": "1.2 Problem Statements",
+        "similarity": 0.780964493751526
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 8,
+        "section": "1.8 Project Organization",
+        "similarity": 0.618472337722778
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 3,
+        "section": "1.1.1 Globally",
+        "similarity": 0.589709664004466
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 8,
+        "section": "1.8 Project Organization",
+        "similarity": 0.589024638475457
+      }
+    ]
+  },
+  {
+    "category": "C. summary",
+    "documentId": 4,
+    "question": "Summarize what this chapter covers overall.",
+    "expectedIdea": "Should reference multiple sections (intro, problem, objectives) without fabricating",
+    "answer": "This chapter covers the introduction to the study, including the background of the project, statement of the problem, research questions, purpose, objectives, scope, and significance of developing an Import and Export Platform for Mogadishu Seaport. It aims to provide a comprehensive overview of the project, its goals, and its potential impact on Somalia's trade and economy. The chapter also outlines the conceptual framework guiding the study and sets the stage for the subsequent chapters, which delve into the literature review, research methodology, system analysis and design, system development and implementation, and the summary of findings and conclusions.",
+    "allScopedCorrectly": true,
+    "sources": [
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 8,
+        "section": "1.8 Project Organization",
+        "similarity": 0.627386689186096
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 8,
+        "section": "1.8 Project Organization",
+        "similarity": 0.626949407276477
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 1,
+        "section": null,
+        "similarity": 0.573372151054613
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 8,
+        "section": "1.8 Project Organization",
+        "similarity": 0.573293387889862
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 3,
+        "section": "1.1.1 Globally",
+        "similarity": 0.570745851353059
+      }
+    ]
+  },
+  {
+    "category": "D. cross-chunk",
+    "documentId": 4,
+    "question": "What is the significance of the project and how does it relate to the problems identified?",
+    "expectedIdea": "Should connect Section 1.7 (significance) with Section 1.2 (problem statements)",
+    "answer": "The project's significance lies in its potential to improve Mogadishu Seaport's trade operations' efficiency, accountability, and transparency. By automating manual processes, the project aims to decrease clearance times and logistical bottlenecks, increasing operational efficiency. Additionally, the platform will provide real-time access to validated data and transaction logs, encouraging accountability and transparency, and helping to combat corruption. The project will also improve analytics and data management, allowing policymakers to base their decisions on precise trade data, and provide convenience, predictability, and lower costs for traders and shipping agents.",
+    "allScopedCorrectly": true,
+    "sources": [
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 7,
+        "section": "1.7 Significance of the Project",
+        "similarity": 0.824984275551064
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 7,
+        "section": "1.7 Significance of the Project",
+        "similarity": 0.801683451084789
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 7,
+        "section": "1.7 Significance of the Project",
+        "similarity": 0.792775018297882
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 6,
+        "section": "1.5.2 Specific Objectives",
+        "similarity": 0.673628152039184
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 8,
+        "section": "1.8 Project Organization",
+        "similarity": 0.6586332517455
+      }
+    ]
+  },
+  {
+    "category": "E. unanswerable",
+    "documentId": 4,
+    "question": "What is the capital of France?",
+    "expectedIdea": "Not available in the document",
+    "answer": "I couldn't find this information in the selected document. The excerpts from chapterOneThesis.pdf do not mention the capital of France or any information related to French geography.",
+    "allScopedCorrectly": true,
+    "sources": [
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 3,
+        "section": "1.1.1 Globally",
+        "similarity": 0.450873865213212
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 4,
+        "section": "1.1.2 Africa",
+        "similarity": 0.430504947900772
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 4,
+        "section": "1.1.2 Africa",
+        "similarity": 0.418856417008853
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 5,
+        "section": "1.2 Problem Statements",
+        "similarity": 0.409821485887678
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 1,
+        "section": null,
+        "similarity": 0.409734045879004
+      }
+    ]
+  },
+  {
+    "category": "E. unanswerable",
+    "documentId": 4,
+    "question": "What programming language is used to build this platform?",
+    "expectedIdea": "Not in this thesis chapter (that detail lives in the other document, not this one)",
+    "answer": "I couldn't find information about the programming language used to build the platform in the selected document excerpts.",
+    "allScopedCorrectly": true,
+    "sources": [
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 8,
+        "section": "1.8 Project Organization",
+        "similarity": 0.683747511133404
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 8,
+        "section": "1.8 Project Organization",
+        "similarity": 0.621973276138306
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 6,
+        "section": "1.5.2 Specific Objectives",
+        "similarity": 0.621285475569099
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 3,
+        "section": "1.1.1 Globally",
+        "similarity": 0.596277261002228
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 3,
+        "section": "1.1.1 Globally",
+        "similarity": 0.595611888039467
+      }
+    ]
+  },
+  {
+    "category": "F. wrong-document protection",
+    "documentId": 1,
+    "question": "What is the introduction about?",
+    "expectedIdea": "Should answer from the Somalia fundraising platform spec, never mention the seaport thesis",
+    "answer": "The introduction is about the Somalia Fundraising Platform, which aims to support individuals or community members raising funds for various causes. The platform is designed to cater to the needs of four main user roles: Donors, Organizers, Beneficiaries, and Co-Organizers. The introduction highlights the importance of trust and safety in the fundraising process, with a focus on visually answering the question \"is this real and safe?\" before asking for donations. The platform is designed to be user-friendly, with a low-bandwidth optimized UI and features such as progress bars, verification badges, and forms for easy donation flow. The introduction also mentions the importance of localization, with language switchers for Somali and English, and currency formatting in USD with an optional SOS-equivalent display.",
+    "allScopedCorrectly": true,
+    "sources": [
+      {
+        "documentId": "1",
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "page": 6,
+        "section": null,
+        "similarity": 0.566105297157642
+      },
+      {
+        "documentId": "1",
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "page": 1,
+        "section": null,
+        "similarity": 0.553312871057562
+      },
+      {
+        "documentId": "1",
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "page": 8,
+        "section": null,
+        "similarity": 0.537818257548602
+      },
+      {
+        "documentId": "1",
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "page": 2,
+        "section": null,
+        "similarity": 0.520108565088853
+      },
+      {
+        "documentId": "1",
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "page": 15,
+        "section": "10 Small business",
+        "similarity": 0.517493859454807
+      }
+    ]
+  },
+  {
+    "category": "F. wrong-document protection",
+    "documentId": 4,
+    "question": "What mobile money providers does this platform support?",
+    "expectedIdea": "That's Somalia-doc content - should NOT appear when scoped to the thesis; expect not-found",
+    "answer": "I couldn't find information about mobile money providers supported by this platform in the selected document excerpts.",
+    "allScopedCorrectly": true,
+    "sources": [
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 8,
+        "section": "1.8 Project Organization",
+        "similarity": 0.574084256534831
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 6,
+        "section": "1.5.2 Specific Objectives",
+        "similarity": 0.550782024860382
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 3,
+        "section": "1.1.1 Globally",
+        "similarity": 0.550041155518328
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 4,
+        "section": "1.1.2 Africa",
+        "similarity": 0.536580562591553
+      },
+      {
+        "documentId": "4",
+        "documentName": "chapterOneThesis.pdf",
+        "page": 3,
+        "section": "1.1.1 Globally",
+        "similarity": 0.525457410487092
+      }
+    ]
+  },
+  {
+    "category": "G. document-scoping",
+    "documentId": 1,
+    "question": "What is the purpose of this platform?",
+    "expectedIdea": "Somalia-first fundraising platform - all sources must be documentId 1",
+    "answer": "The purpose of this platform is to facilitate fundraising for beneficiaries in Somalia, allowing organizers to create and manage campaigns, and donors to contribute to these campaigns. The platform aims to provide a secure, scalable, and user-friendly experience for both organizers and donors, with features such as campaign creation, donation tracking, and verification of donations. The platform also includes a dashboard for administrators to oversee the platform, manage user profiles, and monitor campaign progress.",
+    "error": "Language model returned an error",
+    "sources": [
+      {
+        "documentId": "1",
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "page": 16,
+        "section": "10 Small business",
+        "similarity": 0.68310616364759
+      },
+      {
+        "documentId": "1",
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "page": 3,
+        "section": null,
+        "similarity": 0.662095228967215
+      },
+      {
+        "documentId": "1",
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "page": 8,
+        "section": null,
+        "similarity": 0.654568334059971
+      },
+      {
+        "documentId": "1",
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "page": 12,
+        "section": null,
+        "similarity": 0.648247997514966
+      },
+      {
+        "documentId": "1",
+        "documentName": "somalia-fundraising-platform-spec.pdf",
+        "page": 12,
+        "section": null,
+        "similarity": 0.647686085242864
+      }
+    ],
+    "allScopedCorrectly": true
+  }
+]

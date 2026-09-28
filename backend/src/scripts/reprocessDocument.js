@@ -4,6 +4,7 @@ const { extractPdfText } = require("../services/documentService");
 const { chunkPages } = require("../services/chunkService");
 const { detectPageSections } = require("../services/sectionService");
 const { generateEmbeddings } = require("../services/embeddingService");
+const { readStoredFile } = require("../services/storageService");
 
 // Re-extracts a document from its original file (documents.file_url),
 // re-chunks it page-aware, re-embeds, and replaces its document_chunks rows.
@@ -25,7 +26,8 @@ async function reprocessDocument(documentId) {
 
   console.log(`Reprocessing ${document.file_name} (id=${document.id})...`);
 
-  const result = await extractPdfText(document.file_url);
+  const buffer = await readStoredFile(document.file_url);
+  const result = await extractPdfText(buffer);
   const pageChunks = chunkPages(result.pageTexts, 1000, 200);
   const pageSections = detectPageSections(result.pageTexts);
   const embeddings = await generateEmbeddings(

@@ -8,6 +8,9 @@ const { extractPdfText } = require("../services/documentService");
 const { chunkPages } = require("../services/chunkService");
 const { detectPageSections } = require("../services/sectionService");
 const { generateEmbeddings } = require("../services/embeddingService");
+const { storeUploadedFile } = require("../services/storageService");
+const { getMessages } = require("../services/conversationService");
+const { getSuggestedQuestions } = require("../services/suggestionService");
 
 const router = express.Router();
 
@@ -53,12 +56,24 @@ router.post("/upload", uploadLimiter, upload.single("file"), async (req, res) =>
     }
 
     // 1. Extract text from PDF
-    const result = await extractPdfText(req.file.path);
-
-    if (!result.text || !result.text.trim()) {
+    let result;
+    try {
+      result = await extractPdfText(req.file.path);
+    } catch (parseError) {
+      console.error("PDF parsing failed:", parseError);
       return res.status(400).json({
         status: "error",
-        message: "No readable text was found in the PDF",
+        message: "This PDF could not be read. It may be corrupted.",
+      });
+    }
+
+    if (!result.text || !result.text.trim()) {
+      // Most commonly a scanned/image-only PDF with no OCR text layer.
+      // Aqriye does not perform OCR, so this is reported honestly rather
+      // than silently generating chunks/embeddings from empty text.
+      return res.status(400).json({
+        status: "error",
+        message: "This PDF does not contain readable text.",
       });
     }
 
@@ -80,13 +95,19 @@ router.post("/upload", uploadLimiter, upload.single("file"), async (req, res) =>
     await client.query("BEGIN");
 
     // 5. Save document
+    const safeFileName = req.file.originalname.slice(0, 255);
+
+    // Persists to Supabase Storage when configured, otherwise keeps the
+    // local temp path multer already wrote - see storageService.js.
+    const fileUrl = await storeUploadedFile(req.file.path, safeFileName);
+
     const documentResult = await client.query(
       `
       INSERT INTO documents (file_name, file_url)
       VALUES ($1, $2)
       RETURNING id, file_name, created_at
       `,
-      [req.file.originalname, req.file.path]
+      [safeFileName, fileUrl]
     );
 
     const document = documentResult.rows[0];
@@ -187,6 +208,59 @@ router.get("/", async (req, res) => {
     res.status(500).json({
       status: "error",
       message: "Failed to list documents",
+    });
+  }
+});
+
+const readLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 60,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    status: "error",
+    message: "Too many requests. Please slow down.",
+  },
+});
+
+router.get("/:id/messages", readLimiter, async (req, res) => {
+  try {
+    const messages = await getMessages(req.params.id);
+
+    res.json({
+      status: "ok",
+      messages: messages.map((m) => ({
+        id: m.id,
+        role: m.role,
+        content: m.content,
+        sources: m.sources,
+        createdAt: m.created_at,
+      })),
+    });
+  } catch (error) {
+    console.error("Failed to load conversation history:", error);
+
+    res.status(500).json({
+      status: "error",
+      message: "Unable to access the document right now. Please try again.",
+    });
+  }
+});
+
+router.get("/:id/suggestions", readLimiter, async (req, res) => {
+  try {
+    const suggestions = await getSuggestedQuestions(req.params.id);
+
+    res.json({
+      status: "ok",
+      suggestions,
+    });
+  } catch (error) {
+    console.error("Failed to generate suggestions:", error);
+
+    res.status(500).json({
+      status: "error",
+      message: "Unable to access the document right now. Please try again.",
     });
   }
 });

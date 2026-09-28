@@ -13,7 +13,8 @@ async function extractPdfText(filePath) {
 
     return {
       text: result.text,
-      pages: result.total,
+      totalPages: result.total,
+      pageTexts: result.pages,
     };
   } finally {
     await parser.destroy();

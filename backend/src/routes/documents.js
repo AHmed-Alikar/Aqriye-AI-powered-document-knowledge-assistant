@@ -5,7 +5,8 @@ const rateLimit = require("express-rate-limit");
 
 const db = require("../db");
 const { extractPdfText } = require("../services/documentService");
-const { chunkText } = require("../services/chunkService");
+const { chunkPages } = require("../services/chunkService");
+const { detectPageSections } = require("../services/sectionService");
 const { generateEmbeddings } = require("../services/embeddingService");
 
 const router = express.Router();
@@ -61,10 +62,11 @@ router.post("/upload", uploadLimiter, upload.single("file"), async (req, res) =>
       });
     }
 
-    // 2. Split text into chunks
-    const chunks = chunkText(result.text, 1000, 200);
+    // 2. Split into page-aware chunks + detect section headings per page
+    const pageChunks = chunkPages(result.pageTexts, 1000, 200);
+    const pageSections = detectPageSections(result.pageTexts);
 
-    if (chunks.length === 0) {
+    if (pageChunks.length === 0) {
       return res.status(400).json({
         status: "error",
         message: "No chunks could be created from the PDF",
@@ -90,10 +92,14 @@ router.post("/upload", uploadLimiter, upload.single("file"), async (req, res) =>
     const document = documentResult.rows[0];
 
     // 6. Generate embeddings for every chunk
-    const embeddings = await generateEmbeddings(chunks);
+    const embeddings = await generateEmbeddings(
+      pageChunks.map((chunk) => chunk.content)
+    );
 
     // 7. Save chunks with their embeddings
-    for (let i = 0; i < chunks.length; i++) {
+    for (let i = 0; i < pageChunks.length; i++) {
+      const { content, pageNumber } = pageChunks[i];
+
       await client.query(
         `
         INSERT INTO document_chunks (
@@ -106,11 +112,14 @@ router.post("/upload", uploadLimiter, upload.single("file"), async (req, res) =>
         `,
         [
           document.id,
-          chunks[i],
+          content,
           JSON.stringify(embeddings[i]),
           JSON.stringify({
             chunk_index: i,
-            total_chunks: chunks.length,
+            total_chunks: pageChunks.length,
+            page_number: pageNumber,
+            total_pages: result.totalPages,
+            section: pageSections[pageNumber - 1] ?? null,
           }),
         ]
       );
@@ -125,9 +134,9 @@ router.post("/upload", uploadLimiter, upload.single("file"), async (req, res) =>
       document: {
         id: document.id,
         originalName: req.file.originalname,
-        pages: result.pages,
+        totalPages: result.totalPages,
         textLength: result.text.length,
-        totalChunks: chunks.length,
+        totalChunks: pageChunks.length,
       },
     });
   } catch (error) {
@@ -151,9 +160,17 @@ router.post("/upload", uploadLimiter, upload.single("file"), async (req, res) =>
 
 router.get("/", async (req, res) => {
   try {
-    const result = await db.query(
-      `SELECT id, file_name, created_at FROM documents ORDER BY created_at DESC`
-    );
+    const result = await db.query(`
+      SELECT
+        d.id,
+        d.file_name,
+        d.created_at,
+        COUNT(DISTINCT dc.metadata->>'page_number') AS page_count
+      FROM documents d
+      LEFT JOIN document_chunks dc ON dc.document_id = d.id
+      GROUP BY d.id
+      ORDER BY d.created_at DESC
+    `);
 
     res.json({
       status: "ok",
@@ -161,6 +178,7 @@ router.get("/", async (req, res) => {
         id: row.id,
         fileName: row.file_name,
         createdAt: row.created_at,
+        pageCount: Number(row.page_count) > 0 ? Number(row.page_count) : null,
       })),
     });
   } catch (error) {

@@ -20,7 +20,7 @@ const chatLimiter = rateLimit({
 
 router.post("/", chatLimiter, async (req, res) => {
   try {
-    const { message } = req.body;
+    const { message, documentId } = req.body;
 
     if (!message || !message.trim()) {
       return res.status(400).json({
@@ -29,7 +29,14 @@ router.post("/", chatLimiter, async (req, res) => {
       });
     }
 
-    const { answer, sources } = await answerQuestion(message);
+    if (!documentId) {
+      return res.status(400).json({
+        status: "error",
+        message: "Please select a document before asking a question.",
+      });
+    }
+
+    const { answer, sources } = await answerQuestion(message, documentId);
 
     res.json({
       status: "ok",

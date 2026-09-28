@@ -2,13 +2,21 @@ const { searchSimilarChunks } = require("./retrievalService");
 const { generateAnswer } = require("./llmService");
 
 const TOP_K = 5;
+const NOT_FOUND_MESSAGE =
+  "I couldn't find this information in the selected document.";
 
 function buildContext(chunks) {
   return chunks
-    .map(
-      (chunk) =>
-        `Source: ${chunk.document_name}\nChunk: ${chunk.metadata?.chunk_index ?? chunk.chunk_id}\n\n${chunk.content}`
-    )
+    .map((chunk) => {
+      const page = chunk.metadata?.page_number;
+      const section = chunk.metadata?.section;
+
+      const parts = [chunk.document_name];
+      if (page) parts.push(`Page ${page}`);
+      if (section) parts.push(`Section: ${section}`);
+
+      return `Source: ${parts.join(", ")}\n\n${chunk.content}`;
+    })
     .join("\n\n---\n\n");
 }
 
@@ -18,18 +26,21 @@ function toSources(chunks) {
     documentName: chunk.document_name,
     chunkId: chunk.chunk_id,
     chunkIndex: chunk.metadata?.chunk_index ?? null,
+    page: chunk.metadata?.page_number ?? null,
+    section: chunk.metadata?.section ?? null,
     similarity: chunk.similarity,
   }));
 }
 
-// Question -> question embedding -> similarity search -> context -> LLM.
-// The LLM never sees the whole document, only the top-K retrieved chunks.
-async function answerQuestion(question, topK = TOP_K) {
-  const chunks = await searchSimilarChunks(question, topK);
+// Question -> question embedding -> similarity search (scoped to one
+// document) -> context -> LLM. The LLM never sees the whole document, only
+// the top-K retrieved chunks, and never sees chunks from any other document.
+async function answerQuestion(question, documentId, topK = TOP_K) {
+  const chunks = await searchSimilarChunks(question, documentId, topK);
 
   if (chunks.length === 0) {
     return {
-      answer: "The information is not available in the provided documents.",
+      answer: NOT_FOUND_MESSAGE,
       sources: [],
     };
   }
